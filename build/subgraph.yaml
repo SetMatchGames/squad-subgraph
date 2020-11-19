@@ -1,0 +1,46 @@
+specVersion: 0.0.2
+description: Squad Games / Squad Protocol
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SquadController
+    network: mainnet
+    source:
+      address: "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+      abi: SquadController
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - License
+        - Contribution
+      abis:
+        - name: SquadController
+          file: SquadController/abis/SquadController.json
+      eventHandlers:
+        - event: BuyLicense(address,bytes32,uint256,string,uint256,uint256)
+          handler: handleBuyLicense
+        - event: NewContribution(address,bytes32,string,address,uint16,uint256,address,string)
+          handler: handleNewContribution
+      file: SquadController/SquadController.wasm
+  - kind: ethereum/contract
+    name: TokenClaimCheck
+    network: mainnet
+    source:
+      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+      abi: TokenClaimCheck
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - License
+      abis:
+        - name: TokenClaimCheck
+          file: TokenClaimCheck/abis/TokenClaimCheck.json
+      eventHandlers:
+        - event: Redeem(uint256,uint256,address)
+          handler: handleRedeem
+      file: TokenClaimCheck/TokenClaimCheck.wasm

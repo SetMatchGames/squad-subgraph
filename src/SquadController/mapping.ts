@@ -11,6 +11,7 @@ export function handleNewContribution(event: NewContribution): void {
   contribution.beneficiary = event.params.beneficiary
   contribution.feeRate = event.params.feeRate
   contribution.purchasePrice = event.params.purchasePrice
+  contribution.definition = event.params.metadata
   contribution.supply = new BigInt(0)
   contribution.save()
 }
@@ -20,7 +21,7 @@ export function handleBuyLicense(event: BuyLicense): void {
   license.owner = event.params.buyer
   license.amount = event.params.amount
   license.price = event.params.price
-  let contributionId: string = event.params.contributionId.toHex()
+  let contributionId = event.params.contributionId.toHex()
   license.contribution = contributionId
   license.save()
 

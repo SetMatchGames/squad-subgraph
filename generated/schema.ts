@@ -78,6 +78,15 @@ export class Contribution extends Entity {
     this.set("purchasePrice", Value.fromBigInt(value));
   }
 
+  get definition(): string {
+    let value = this.get("definition");
+    return value.toString();
+  }
+
+  set definition(value: string) {
+    this.set("definition", Value.fromString(value));
+  }
+
   get supply(): BigInt {
     let value = this.get("supply");
     return value.toBigInt();

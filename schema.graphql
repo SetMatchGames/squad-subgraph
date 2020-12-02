@@ -4,6 +4,7 @@ type Contribution @entity {
   beneficiary: Bytes! # address
   feeRate: Int! # in basis points
   purchasePrice: BigInt! # minimum, in reserve tokens
+  definition: String!
   supply: BigInt! # latest supply of contribution tokens
 }
 

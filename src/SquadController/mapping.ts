@@ -27,6 +27,7 @@ export function handleBuyLicense(event: BuyLicense): void {
 
   // update contribution supply
   let contribution = Contribution.load(contributionId)
+  if (contribution === null) return
   contribution.supply = contribution.supply.plus(event.params.amount)
   contribution.save()
 
